@@ -3,7 +3,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class ModeleModel extends Model
 {    
-   protected $table = 'modele';
+   protected $table = 'freezbe';
    protected $fillable = [
         'Nom', 
         'Description', 

@@ -16,3 +16,17 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group(['prefix' => 'Modele'], function () use ($router) {
+    $router->get('/',  ['uses' =>
+      'ModeleController@showAll']);
+    $router->get('/{id}', ['uses' =>
+      'ModeleController@showOne']);
+    $router->post('/create', ['uses' =>
+      'ModeleController@create']);
+    $router->put('/update/{id}', ['uses' =>
+      'ModeleController@update']);
+    $router->delete('/delete/{id}', ['uses' =>
+      'ModeleController@delete']);
+  });
