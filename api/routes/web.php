@@ -31,3 +31,42 @@ $router->group(['prefix' => 'Modele'], function () use ($router) {
     $router->delete('/delete/{id}', ['uses' =>
       'ModeleController@delete']);
   });
+  
+$router->group(['prefix' => 'Ingredient'], function () use ($router) {
+    $router->get('/',  ['uses' =>
+      'IngredientController@showAll']);
+    $router->get('/{id}', ['uses' =>
+      'IngredientController@showOne']);
+    $router->post('/create', ['uses' =>
+      'IngredientController@create']);
+    $router->put('/update/{id}', ['uses' =>
+      'IngredientController@update']);
+    $router->delete('/delete/{id}', ['uses' =>
+      'IngredientController@delete']);
+  });
+
+  $router->group(['prefix' => 'Etapes'], function () use ($router) {
+    $router->get('/',  ['uses' =>
+      'EtapesController@showAll']);
+    $router->get('/{id}', ['uses' =>
+      'EtapesController@showOne']);
+    $router->post('/create', ['uses' =>
+      'EtapesController@create']);
+    $router->put('/update/{id}', ['uses' =>
+      'EtapesController@update']);
+    $router->delete('/delete/{id}', ['uses' =>
+      'EtapesController@delete']);
+  });
+
+$router->group(['prefix' => 'Procede'], function () use ($router) {
+    $router->get('/',  ['uses' =>
+      'ProcedeController@showAll']);
+    $router->get('/{id}', ['uses' =>
+      'ProcedeController@showOne']);
+    $router->post('/create', ['uses' =>
+      'ProcedeController@create']);
+    $router->put('/update/{id}', ['uses' =>
+      'ProcedeController@update']);
+    $router->delete('/delete/{id}', ['uses' =>
+      'ProcedeController@delete']);
+  });
