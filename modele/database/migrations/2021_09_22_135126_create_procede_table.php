@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModeleTable extends Migration
+class CreateProcedeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateModeleTable extends Migration
      */
     public function up()
     {
-        Schema::create('modele', function (Blueprint $table) {
+        Schema::create('procede', function (Blueprint $table) {
             $table->id();
-            $table->string('Nom', 100);
-            $table->string('Description', 100);
-            $table->float('pUHT', 100);
-            $table->string('Gamme', 100);
+            $table->string('pro_nom', 100);
+            $table->string('pro_description', 100);
+            $table->string('id_procede', 100);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateModeleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modele');
+        Schema::dropIfExists('procede');
     }
 }

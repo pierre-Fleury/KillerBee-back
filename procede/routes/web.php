@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'procede'], function () use ($router) {
+$router->group(['prefix' => 'Procede'], function () use ($router) {
     $router->get('/',  ['uses' =>
       'procedeController@showAll']);
     $router->get('/{id}', ['uses' =>
