@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 
 
 
-$router->group(['prefix' => 'Modele'], function () use ($router) {
+$router->group(['prefix' => 'Modele', 'middleware' => 'App\Http\Middleware\Authenticate'], function () use ($router) {
     $router->get('/',  ['uses' =>
       'ModeleController@showAll']);
     $router->get('/{id}', ['uses' =>
