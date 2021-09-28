@@ -19,13 +19,13 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'Procede'], function () use ($router) {
     $router->get('/',  ['uses' =>
-      'procedeController@showAll']);
+      'ProcedeController@showAll']);
     $router->get('/{id}', ['uses' =>
-      'procedeController@showOne']);
+      'ProcedeController@showOne']);
     $router->post('/create', ['uses' =>
-      'procedeController@create']);
+      'ProcedeController@create']);
     $router->put('/update/{id}', ['uses' =>
-      'procedeController@update']);
+      'ProcedeController@update']);
     $router->delete('/delete/{id}', ['uses' =>
-      'procedeController@delete']);
+      'ProcedeController@delete']);
   });
