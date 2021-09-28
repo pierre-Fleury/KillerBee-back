@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\LogsModel;
+use Illuminate\Http\Request;
 use Closure;
 
 class ExampleMiddleware
