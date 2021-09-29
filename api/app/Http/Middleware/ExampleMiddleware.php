@@ -20,18 +20,51 @@ class ExampleMiddleware
         $req = $request->input();
         $url = $request->url();
         $pieces = explode("/", $url);
-        $test =  implode(",", $req );
-        if(!isset($pieces[4])){
+        $test =  implode(",", $req);
+
+        if (!isset($pieces[4])) {
             $pieces[4] = "";
         }
-        //$comma_separated = implode(",", $req);
-        $data = array(
-            "logs_nom" => $pieces[3],
-            "type_requete" => $pieces[4], 
-            "requete" => $test
-          );
-        $input = $request->input(); 
-        LogsModel::create($data);
+
+        if ($pieces[4] == "auth") {
+            $data = array(
+                "logs_nom" => "connexion",
+                "type_requete" => $pieces[4],
+                "requete" => $test
+            );
+            $input = $request->input();
+            LogsModel::create($data);
+            return $next($request);
+        } elseif ($pieces[4] == "create") {
+            $data = array(
+                "logs_nom" => $pieces[3],
+                "type_requete" => "create",
+                "requete" => $test
+            );
+            $input = $request->input();
+            LogsModel::create($data);
+            return $next($request);
+        } elseif ($pieces[4] == "delete") {
+            $data = array(
+                "logs_nom" => $pieces[3],
+                "type_requete" => "delete",
+                "requete" => $test
+            );
+            $input = $request->input();
+            LogsModel::create($data);
+            return $next($request);
+        } elseif ($pieces[4] == "update") {
+            $data = array(
+                "logs_nom" => $pieces[3],
+                "type_requete" => "update",
+                "requete" => $test
+            );
+            $input = $request->input();
+            
+            return $next($request);
+            //LogsModel::create($data);
+        }
+        
         return $next($request);
     }
 }
