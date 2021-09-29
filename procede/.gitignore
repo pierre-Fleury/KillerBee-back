@@ -1,4 +1,8 @@
 /vendor
+/modele/vendor
+/procede/vendor
+/etapes/vendor
+/ingredient/vendor
 /.idea
 Homestead.json
 Homestead.yaml

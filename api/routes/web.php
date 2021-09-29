@@ -17,7 +17,11 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-
+$router->group(['prefix' => 'login'], function () use ($router) {
+  $router->post('/auth', ['uses' =>
+    'UsersController@login']);
+    
+});
 
 $router->group(['prefix' => 'Modele'], function () use ($router) {
     $router->get('/',  ['uses' =>

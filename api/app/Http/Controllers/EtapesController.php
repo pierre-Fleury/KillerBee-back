@@ -6,34 +6,34 @@ class EtapesController extends Controller
 {
   public function showAll()
   {
-    $response = Http::get('http://localhost:8004/Etapes');
+    $response = Http::get('http://webprocede:80/Etapes');
     return  $response->getBody();
   }
 
   public function showOne($id)
   {
-    $url = "http://localhost:8004/Etapes/".$id;
+    $url = "http://webprocede:80/Etapes/".$id;
     $response = Http::get($url);
     return  $response->getBody();
   }
 
   public function create(Request $request)
   {
-    $url = "http://localhost:8004/Etapes/create";
+    $url = "http://webprocede:80/Etapes/create";
     $response = Http::post($url, $request->all());
     return $response->getBody();
   }
 
   public function update($id, Request $request)
   {
-    $url = "http://localhost:8004/Etapes/update/".$id;
+    $url = "http://webprocede:80/Etapes/update/".$id;
     $response = Http::put($url, $request->all());
     return $response->getBody();
   }
   
   public function delete($id)
   {
-    $url = "http://localhost:8004/Etapes/delete/".$id;
+    $url = "http://webprocede:80/Etapes/delete/".$id;
     $response = Http::delete($url);
     return  $response->getBody();
   }

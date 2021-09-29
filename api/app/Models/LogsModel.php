@@ -1,13 +1,13 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class ProcedeModel extends Model
+class LogsModel extends Model
 {    
-   protected $table = 'procede';
+   protected $table = 'logs';
    protected $fillable = [
-        'pro_nom', 
-        'pro_description',
-        'id_procede'
+        'logs_nom', 
+        'type_requete', 
+        'requete'
    ];
    //protected $hidden = [];
 }
