@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFreezbeTable extends Migration
+class CreateModeleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,11 @@ class CreateFreezbeTable extends Migration
     public function up()
     {
         Schema::create('modele', function (Blueprint $table) {
-            $table->id();
-            $table->string('Nom', 100);
-            $table->string('Description', 100);
-            $table->float('pUHT', 100);
-            $table->string('Gamme', 100);
+            $table->increments('mod_id');
+            $table->string('mod_nom', 255);
+            $table->string('mod_description', 255);
+            $table->float('mod_pUHT', 100);
+            $table->string('mod_gamme', 255);
             $table->timestamps();
         });
     }
