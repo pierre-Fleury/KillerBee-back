@@ -1,0 +1,116 @@
+
+services:
+  apigateway:
+    build:
+      context: ./api
+      dockerfile: dockerfile
+    volumes:
+      - asset-volume:/var/www
+    networks:
+      - app-network
+    ports:
+      - "9000:9000"
+    
+  ms_ingredient:
+    build:
+      context: ./ingredient
+      dockerfile: dockerfile
+    volumes:
+      - asset-volume:/var/www/ingredient
+    networks:
+      - app-network
+
+  ms_procede:
+    build:
+      context: ./procede
+      dockerfile: dockerfile
+    volumes:
+      - asset-volume:/var/www/procede
+    networks:
+      - app-network
+
+  ms_modele:
+    build:
+      context: ./modele
+      dockerfile: dockerfile
+    volumes:
+      - asset-volume:/var/www/modele
+    networks:
+      - app-network
+
+  ms_etapes:
+    build:
+      context: ./etapes
+      dockerfile: dockerfile
+    volumes:
+      - asset-volume:/var/www/etapes
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - asset-volume:/var/www
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  webmodele:
+    image: nginx:alpine
+    container_name: webmodele
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - asset-volume:/var/www/modele
+      - ./nginx/conf.d/modele.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  webprocede:
+    image: nginx:alpine
+    container_name: webprocede
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - asset-volume:/var/www/procede
+      - ./nginx/conf.d/procede.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  webingredient:
+    image: nginx:alpine
+    container_name: webingredient
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - asset-volume:/var/www/ingredient
+      - ./nginx/conf.d/ingredient.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+  webetapes:
+    image: nginx:alpine
+    container_name: webetapes
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - asset-volume:/var/www/etapes
+      - ./nginx/conf.d/etapes.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - app-network
+
+      
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+  asset-volume:
