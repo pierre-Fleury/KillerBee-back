@@ -41,7 +41,7 @@ class UsersController extends Controller
       $data = array(
         "api_token" => $token,
     );
-      $login->update($data);
+      //$login->update($data);
       return response()->json($login);;
     }
     
