@@ -64,7 +64,7 @@ class LogMiddleware
             $input = $request->input();
             
             return $next($request);
-            //LogsModel::create($data);
+            LogsModel::create($data);
         }
         
         return $next($request);
