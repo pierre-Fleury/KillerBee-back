@@ -6,34 +6,34 @@ class IngredientController extends Controller
 {
   public function showAll()
   {
-    $response = Http::get('http://webingredient:80/Ingredient');
+    $response = Http::get('http://localhost:8003/Ingredient');
     return  $response->getBody();
   }
 
   public function showOne($id)
   {
-    $url = "http://webingredient:80/Ingredient/".$id;
+    $url = "http://localhost:8003/Ingredient/".$id;
     $response = Http::get($url);
     return  $response->getBody();
   }
 
   public function create(Request $request)
   {
-    $url = "http://webingredient:80/Ingredient/create";
+    $url = "http://localhost:8003/Ingredient/create";
     $response = Http::post($url, $request->all());
     return $response->getBody();
   }
 
   public function update($id, Request $request)
   {
-    $url = "http://webingredient:80/Ingredient/update/".$id;
+    $url = "http://localhost:8003/Ingredient/update/".$id;
     $response = Http::put($url, $request->all());
     return $response->getBody();
   }
   
   public function delete($id)
   {
-    $url = "http://webingredient:80/Ingredient/delete/".$id;
+    $url = "http://localhost:8003/Ingredient/delete/".$id;
     $response = Http::delete($url);
     return  $response->getBody();
   }
