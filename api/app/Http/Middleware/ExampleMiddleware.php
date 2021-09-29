@@ -22,68 +22,19 @@ class ExampleMiddleware
             'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With, api_token',
+            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With',
          ];
-        
+
         if ($request->isMethod('OPTIONS')) {
             return response()->json('{"method":"OPTIONS"}', 200, $headers);
         }
-        
+
         $response = $next($request);
-        
+
         foreach ($headers as $key => $value) {
             $response->header($key, $value);
         }
-        
-        
-        $req = $request->input();
-        $url = $request->url();
-        $pieces = explode("/", $url);
-        $test =  implode(",", $req);
 
-        if (!isset($pieces[4])) {
-            $pieces[4] = "";
-        }
-
-        if ($pieces[4] == "auth") {
-            $data = array(
-                "logs_nom" => "connexion",
-                "type_requete" => $pieces[4],
-                "requete" => $test
-            );
-            $input = $request->input();
-            LogsModel::create($data);
-            return $next($response);
-        } elseif ($pieces[4] == "create") {
-            $data = array(
-                "logs_nom" => $pieces[3],
-                "type_requete" => "create",
-                "requete" => $test
-            );
-            $input = $request->input();
-            LogsModel::create($data);
-            return $next($response);
-        } elseif ($pieces[4] == "delete") {
-            $data = array(
-                "logs_nom" => $pieces[3],
-                "type_requete" => "delete",
-                "requete" => $test
-            );
-            $input = $request->input();
-            LogsModel::create($data);
-            return $next($response);
-        } elseif ($pieces[4] == "update") {
-            $data = array(
-                "logs_nom" => $pieces[3],
-                "type_requete" => "update",
-                "requete" => $test
-            );
-            $input = $request->input();
-            
-            return $next($response);
-            //LogsModel::create($data);
-        }
-        
-        return $next($response);
+        return $response;
     }
 }
