@@ -14,7 +14,7 @@ class Ingredient extends Migration
     public function up()
     {
         Schema::create('ingredient', function (Blueprint $table) {
-            $table->increments('ing_id');
+            $table->increments('id');
             $table->string('ing_nom', 100);
             $table->string('ing_description', 100);
             $table->timestamps();

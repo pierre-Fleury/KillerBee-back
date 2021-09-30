@@ -7,7 +7,7 @@ class ProcedeModel extends Model
    protected $fillable = [
         'pro_nom', 
         'pro_description',
-        'etape_id'
+        'module_nom'
    ];
    //protected $hidden = [];
 }
