@@ -14,11 +14,11 @@ class CreateModeleTable extends Migration
     public function up()
     {
         Schema::create('modele', function (Blueprint $table) {
-            $table->increments('mod_id');
-            $table->string('mod_nom', 255);
-            $table->string('mod_description', 255);
-            $table->float('mod_pUHT', 100);
-            $table->string('mod_gamme', 255);
+            $table->increments('id');
+            $table->string('module_nom', 255);
+            $table->string('module_description', 255);
+            $table->float('module_pUHT', 100);
+            $table->string('module_gamme', 255);
             $table->timestamps();
         });
     }

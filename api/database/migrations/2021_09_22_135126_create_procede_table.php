@@ -14,10 +14,10 @@ class CreateProcedeTable extends Migration
     public function up()
     {
         Schema::create('procede', function (Blueprint $table) {
-            $table->increments('pro_id');
+            $table->increments('id');
             $table->string('pro_nom', 100);
             $table->string('pro_description', 100);
-            $table->foreignId('mod_id')->constrained('modele');
+            $table->string('module_nom', 255);
             $table->timestamps();
         });
     }
