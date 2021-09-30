@@ -5,6 +5,7 @@ class IngredientModel extends Model
 {    
    protected $table = 'ingredient';
    protected $fillable = [
+        'ing_id',
         'ing_nom', 
         'ing_description'
    ];

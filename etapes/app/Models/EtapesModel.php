@@ -5,7 +5,7 @@ class EtapesModel extends Model
 {    
    protected $table = 'etape';
    protected $fillable = [
-        'etap_label', 
+        'etap_nom', 
         'etap_description'
    ];
    //protected $hidden = [];
