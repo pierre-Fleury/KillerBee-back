@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProcedeTable extends Migration
+class CreateGrammageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProcedeTable extends Migration
      */
     public function up()
     {
-        Schema::create('procede', function (Blueprint $table) {
-            $table->increments('pro_id');
-            $table->string('pro_nom', 100);
-            $table->string('pro_description', 100);
+        Schema::create('grammage', function (Blueprint $table) {
+            $table->increments('gra_id');
             $table->foreignId('mod_id')->constrained('modele');
+            $table->foreignId('ing_id')->constrained('ingredient');
+            $table->string('gra_grammage', 255);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateProcedeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('procede');
+        Schema::dropIfExists('grammage');
     }
 }

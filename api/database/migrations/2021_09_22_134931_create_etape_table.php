@@ -14,7 +14,7 @@ class CreateEtapeTable extends Migration
     public function up()
     {
         Schema::create('etape', function (Blueprint $table) {
-            $table->id();
+            $table->increments('etap_id');
             $table->string('etap_nom', 100);
             $table->string('etap_description', 100);
             $table->timestamps();

@@ -5,10 +5,10 @@ class ModeleModel extends Model
 {    
    protected $table = 'modele';
    protected $fillable = [
-        'Nom', 
-        'Description', 
-        'pUHT', 
-        'Gamme'
+        'module_nom', 
+        'module_description', 
+        'module_pUHT', 
+        'module_gamme'
    ];
    //protected $hidden = [];
 }
