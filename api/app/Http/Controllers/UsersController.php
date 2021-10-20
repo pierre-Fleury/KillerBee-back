@@ -7,6 +7,7 @@ use DateTime;
 use Firebase\JWT\JWT;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -30,13 +31,27 @@ class UsersController extends Controller
   {
     $email = $request->input('email');
     $password = $request->input('password');
+
     try {
 
-      $login = Users::where('email', $email)
-      ->where('password', $password)->firstOrFail();
-    
+      $login = Users::where('email', $email)->firstOrFail();
+
+      try {
+        
+        if( \Illuminate\Support\Facades\Hash::check( $password, $login['password']) == false) {
+          // Password is not matching 
+          $check = false;
+        } else {
+          // Password is matching 
+          $check =true;
+        }
+
+      } catch (\Exception $e) {
+
+        return response()->json("identifiant ou/et mot de passe incorrect");
+      }
     } catch (\Exception $e) {
-    
+
       return response()->json("identifiant ou mot de passe incorrect");
     }
 
@@ -61,8 +76,22 @@ class UsersController extends Controller
       $login->update($data);
       return response()->json($login);;
     }
-    
   }
 
-
+  public function createUser(Request $request)
+  {
+    $email = $request->input('email');
+    $username = $request->input('username');
+    $password = $request->input('password');
+    $api_token = $request->input('api_token');
+    $hashed =  Hash::make($password);
+    $data = array(
+      "username" => $username,
+      "password" => $hashed,
+      "email" => $email,
+      "api_token" => $api_token
+    );
+    Users::create($data);
+    return response()->json(Users::all());
+  }
 }
