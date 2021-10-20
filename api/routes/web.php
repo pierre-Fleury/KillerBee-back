@@ -14,63 +14,65 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+  return $router->app->version();
 });
 
 $router->group(['prefix' => 'login'], function () use ($router) {
   $router->post('/auth', ['uses' =>
-    'UsersController@login']);
-    
+  'UsersController@login']);
+
+  $router->post('/create', ['uses' =>
+  'UsersController@createUser']);
 });
 
-$router->group(['prefix' => 'Modele'], function () use ($router) {
-    $router->get('/',  ['uses' =>
-      'ModeleController@showAll']);
-    $router->get('/{id}', ['uses' =>
-      'ModeleController@showOne']);
-    $router->post('/create', ['uses' =>
-      'ModeleController@create']);
-    $router->put('/update/{id}', ['uses' =>
-      'ModeleController@update']);
-    $router->delete('/delete/{id}', ['uses' =>
-      'ModeleController@delete']);
-  });
-  
-$router->group(['prefix' => 'Ingredient'], function () use ($router) {
-    $router->get('/',  ['uses' =>
-      'IngredientController@showAll']);
-    $router->get('/{id}', ['uses' =>
-      'IngredientController@showOne']);
-    $router->post('/create', ['uses' =>
-      'IngredientController@create']);
-    $router->put('/update/{id}', ['uses' =>
-      'IngredientController@update']);
-    $router->delete('/delete/{id}', ['uses' =>
-      'IngredientController@delete']);
-  });
+$router->group(['prefix' => 'Modele', 'middleware' => 'App\Http\Middleware\Authenticate'], function () use ($router) {
+  $router->get('/',  ['uses' =>
+  'ModeleController@showAll']);
+  $router->get('/{id}', ['uses' =>
+  'ModeleController@showOne']);
+  $router->post('/create', ['uses' =>
+  'ModeleController@create']);
+  $router->put('/update/{id}', ['uses' =>
+  'ModeleController@update']);
+  $router->delete('/delete/{id}', ['uses' =>
+  'ModeleController@delete']);
+});
 
-  $router->group(['prefix' => 'Etapes'], function () use ($router) {
-    $router->get('/',  ['uses' =>
-      'EtapesController@showAll']);
-    $router->get('/{id}', ['uses' =>
-      'EtapesController@showOne']);
-    $router->post('/create', ['uses' =>
-      'EtapesController@create']);
-    $router->put('/update/{id}', ['uses' =>
-      'EtapesController@update']);
-    $router->delete('/delete/{id}', ['uses' =>
-      'EtapesController@delete']);
-  });
+$router->group(['prefix' => 'Ingredient', 'middleware' => 'App\Http\Middleware\Authenticate'], function () use ($router) {
+  $router->get('/',  ['uses' =>
+  'IngredientController@showAll']);
+  $router->get('/{id}', ['uses' =>
+  'IngredientController@showOne']);
+  $router->post('/create', ['uses' =>
+  'IngredientController@create']);
+  $router->put('/update/{id}', ['uses' =>
+  'IngredientController@update']);
+  $router->delete('/delete/{id}', ['uses' =>
+  'IngredientController@delete']);
+});
 
-$router->group(['prefix' => 'Procede'], function () use ($router) {
-    $router->get('/',  ['uses' =>
-      'ProcedeController@showAll']);
-    $router->get('/{id}', ['uses' =>
-      'ProcedeController@showOne']);
-    $router->post('/create', ['uses' =>
-      'ProcedeController@create']);
-    $router->put('/update/{id}', ['uses' =>
-      'ProcedeController@update']);
-    $router->delete('/delete/{id}', ['uses' =>
-      'ProcedeController@delete']);
-  });
+$router->group(['prefix' => 'Etapes', 'middleware' => 'App\Http\Middleware\Authenticate'], function () use ($router) {
+  $router->get('/',  ['uses' =>
+  'EtapesController@showAll']);
+  $router->get('/{id}', ['uses' =>
+  'EtapesController@showOne']);
+  $router->post('/create', ['uses' =>
+  'EtapesController@create']);
+  $router->put('/update/{id}', ['uses' =>
+  'EtapesController@update']);
+  $router->delete('/delete/{id}', ['uses' =>
+  'EtapesController@delete']);
+});
+
+$router->group(['prefix' => 'Procede', 'middleware' => 'App\Http\Middleware\Authenticate'], function () use ($router) {
+  $router->get('/',  ['uses' =>
+  'ProcedeController@showAll']);
+  $router->get('/{id}', ['uses' =>
+  'ProcedeController@showOne']);
+  $router->post('/create', ['uses' =>
+  'ProcedeController@create']);
+  $router->put('/update/{id}', ['uses' =>
+  'ProcedeController@update']);
+  $router->delete('/delete/{id}', ['uses' =>
+  'ProcedeController@delete']);
+});
