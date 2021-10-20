@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Log;
+use DateTime;
+use Firebase\JWT\JWT;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -37,11 +41,24 @@ class UsersController extends Controller
     }
 
     if($login){
-      $token = Str::random(60);
+      $issuedAt   = new DateTime();
+      $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();
+      $serverName = "KillerBee.com";
+      $parameters = [
+        'exp'  => $expire,                           // Expire
+        'userName' => $request->input('email'),      // User name
+      ];
+      $secretKey = env('APP_SECRET_KEY');
+      $token = JWT::encode(
+        $parameters,
+        $secretKey,
+        'HS512'
+      );
+      // $token = Str::random(60);
       $data = array(
         "api_token" => $token,
     );
-      //$login->update($data);
+      $login->update($data);
       return response()->json($login);;
     }
     

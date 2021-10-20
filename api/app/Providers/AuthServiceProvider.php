@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Users;
+use DateTime;
+use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -44,7 +46,18 @@ class AuthServiceProvider extends ServiceProvider
         
         $this->app['auth']->viaRequest('api', function ($request) {
             if ($request->input('api_token')) {
-                return Users::where('api_token', $request->input('api_token'))->first();
+                $user = Users::where('api_token', $request->input('api_token'))->first();
+                if($user) {
+                    $t = $request->input('api_token');
+                    try {
+                        $decoded = JWT::decode($t, env('APP_SECRET_KEY'), ['HS512']);
+                    } catch (\Firebase\JWT\ExpiredException $err) {
+                       if($err->getMessage() == "Expired token" ) {
+                            return false;
+                       } 
+                    }
+                    return $user;
+                }    
             }
         });
     }

@@ -18,7 +18,7 @@ class CreateUserTable extends Migration
             $table->string('email', 100);
             $table->string('username', 100);
             $table->string('password', 100);
-            $table->string('api_token', 100);
+            $table->string('api_token', 255);
             $table->timestamps();
         });
     }
