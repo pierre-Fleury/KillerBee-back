@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+use DateTime;
+use Firebase\JWT\JWT;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -52,12 +55,25 @@ class UsersController extends Controller
       return response()->json("identifiant ou mot de passe incorrect");
     }
 
-    if ($check) {
-      $token = Str::random(60);
+    if($login){
+      $issuedAt   = new DateTime();
+      $expire     = $issuedAt->modify('+60 minutes')->getTimestamp();
+      $serverName = "KillerBee.com";
+      $parameters = [
+        'exp'  => $expire,                           // Expire
+        'userName' => $request->input('email'),      // User name
+      ];
+      $secretKey = env('APP_SECRET_KEY');
+      $token = JWT::encode(
+        $parameters,
+        $secretKey,
+        'HS512'
+      );
+      // $token = Str::random(60);
       $data = array(
         "api_token" => $token,
-      );
-      //$login->update($data);
+    );
+      $login->update($data);
       return response()->json($login);;
     }
   }
